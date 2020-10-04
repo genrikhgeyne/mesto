@@ -1,8 +1,8 @@
 {
   "name": "mesto",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Interactive photo feed",
+  "main": "./src/index.js/",
   "scripts": {
     "build": "cross-env NODE_ENV=production rimraf dist && webpack --mode production",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --mode development --watch",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/genrikhgeyne/mesto.git"
   },
-  "author": "",
+  "author": "Geyne Genrikh",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/genrikhgeyne/mesto/issues"
@@ -28,6 +28,7 @@
     "css-loader": "^4.3.0",
     "cssnano": "^4.1.10",
     "file-loader": "^6.1.0",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^4.5.0",
     "image-webpack-loader": "^7.0.1",
     "mini-css-extract-plugin": "^0.11.3",

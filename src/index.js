@@ -1,11 +1,11 @@
-import Api from "../scripts/Api.js";
-import Card from "../scripts/Card.js";
-import CardList from "../scripts/CardList.js";
-import Popup from "../scripts/Popup.js";
-import UserInfo from "../scripts/UserInfo.js";
-import FormValidator from "../scripts/FormValidator.js";
+import Api from "./scripts/Api.js";
+import Card from "./scripts/Card.js";
+import CardList from "./scripts/CardList.js";
+import Popup from "./scripts/Popup.js";
+import UserInfo from "./scripts/UserInfo.js";
+import FormValidator from "./scripts/FormValidator.js";
 
-import "./style.css";
+import "./index.css";
 
 const serverUrl =process.env.NODE_ENV === 'development'? 'http://nomoreparties.co/cohort12' : 'https://nomoreparties.co/cohort12';
 
