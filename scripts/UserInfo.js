@@ -1,4 +1,4 @@
-class UserInfo {
+export default class UserInfo {
   constructor(nameValue, aboutValue) {
     this.name = nameValue.textContent;
     this.about = aboutValue.textContent;
