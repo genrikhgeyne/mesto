@@ -9,6 +9,6 @@
 #### Запустить проект в режиме production: `$npm run build`
 #### Запустить проект в режиме deploy: `$npm run deploy`
 ##### Мой проект: [Репозиторий](https://github.com/genrikhgeyne/mesto/)
-##### Git pages: [Mesto](https://github.com/genrikhgeyne/mesto)
+##### Git pages: [Mesto](https://genrikhgeyne.github.io/mesto/)
 ##### Источник знаний: [ЯндексПрактикум](https://praktikum.yandex.ru/)
 ##### Автор проекта: Гейне Генрих
