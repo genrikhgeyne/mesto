@@ -22,14 +22,19 @@ module.exports = {
           test: /\.css$/i,
           use:[
             (isDev ? 'style-loader' : MiniCssExtractPlugin.loader),
-            'css-loader',
+            {
+              loader:'css-loader',
+              options: {
+                  importLoaders: 2
+              }
+            },
             'postcss-loader'
           ]
         },
         {
           test: /\.(png|jpg|gif|ico|svg)$/,
           use: [
-            'file-loader?name=../images/[name].[ext]&esModule=false',
+            'file-loader?name=./images/[name].[ext]&esModule=false',
              {
               loader: 'image-webpack-loader',
               options: {}
