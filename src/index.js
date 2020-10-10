@@ -1,3 +1,14 @@
+import Api from "./scripts/Api.js";
+import Card from "./scripts/Card.js";
+import CardList from "./scripts/CardList.js";
+import Popup from "./scripts/Popup.js";
+import UserInfo from "./scripts/UserInfo.js";
+import FormValidator from "./scripts/FormValidator.js";
+
+import "./index.css";
+
+const serverUrl =process.env.NODE_ENV === 'development'? 'http://nomoreparties.co/cohort12' : 'https://nomoreparties.co/cohort12';
+
 const popupAddContainer = document.querySelector('.popup-add');
 const popupEditContainer = document.querySelector('.popup-edit');
 const popupPhotoContainer = document.querySelector('.popup-photo');
@@ -30,7 +41,6 @@ const placeList = document.querySelector('.places-list');
 const createCard = (...args) => new Card(...args);
 
 const cardList = new CardList (placeList, createCard);
-// cardList.render();
 
 const nameValue = document.querySelector('.user-info__name');
 const aboutValue = document.querySelector('.user-info__job');
@@ -47,7 +57,7 @@ function openPhoto(event) {
   }
 }
 
-api.methodApi('https://nomoreparties.co/cohort12/users/me', 'GET', {authorization: 'f3ff5620-355a-45ba-81b6-2c05840deeb1'})
+api.methodApi(serverUrl+'/users/me', 'GET', {authorization: 'f3ff5620-355a-45ba-81b6-2c05840deeb1'})
   .then((result) => {
     nameValue.textContent = result.name;
     aboutValue.textContent = result.about;
@@ -57,12 +67,8 @@ api.methodApi('https://nomoreparties.co/cohort12/users/me', 'GET', {authorizatio
     console.log(err);
   });
 
-api.methodApi('https://nomoreparties.co/cohort12/cards', 'GET', {authorization: 'f3ff5620-355a-45ba-81b6-2c05840deeb1'})
+api.methodApi(serverUrl+'/cards', 'GET', {authorization: 'f3ff5620-355a-45ba-81b6-2c05840deeb1'})
   .then((result) => {
-    /*REVIEW2. Надо лучше. В 9-м задании метод render никто не отменял. Просто в этом задании надо массив карточек сделать параметром этого
-    метода, а не конструктора класса. При использовании метода класса для рендера карточек, существует возможность замены классов Card и CardList
-    другими классами, чтобы придать проекту какой-либо другой смысл.
-    */
     result.forEach((item)=> {
       cardList.addCard(item.name, item.link);
     })
@@ -110,17 +116,14 @@ formAdd.form.addEventListener('submit', (event) => {
 formEdit.form.addEventListener('submit', (event => {
   event.preventDefault();
 
-  // userInfo.setUserInfo(nameForm, aboutForm);
-  // userInfo.updateUserInfo(nameValue, aboutValue);
-
-api.methodApi('https://nomoreparties.co/cohort12/users/me', 'PATCH', {authorization: 'f3ff5620-355a-45ba-81b6-2c05840deeb1', 'Content-Type': 'application/json'}, JSON.stringify({name: nameForm.value, about: aboutForm.value}))
-  .then((result) => {
-    userInfo.setUserInfo(nameValue, aboutValue, result.name, result.about);
-    popupEdit.close();
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+  api.methodApi(serverUrl+' /users/me', 'PATCH', {authorization: 'f3ff5620-355a-45ba-81b6-2c05840deeb1', 'Content-Type': 'application/json'}, JSON.stringify({name: nameForm.value, about: aboutForm.value}))
+    .then((result) => {
+      userInfo.setUserInfo(nameValue, aboutValue, result.name, result.about);
+      popupEdit.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
 }));
 
@@ -132,42 +135,3 @@ formAdd.form.addEventListener('input', (event) => {
   formAdd.setEventListeners(event.target, submitButtonAdd);
 });
 
-
-
-/*
-REVIEW. Резюме.
-
-Взаимодействие с сервером происходит. Карточки и информация о профиле загружаются. Информация о профиле сохраняется на сервере.
-
-Но, надо исправить существенные нюансы.
-
-+1. Структура методов класса Api должна быть изменена (подробный комментарий и образец в файле Api.js).
-
-+2. При взаимодействии с сервером, нужно произвести закрытие формы профиля в методе then обработки ответа сервера
-
-(подробный комментарий и образец в этом файле).
-
-3. Все файлы с расширением js должны быть помещены в папку в корне Вашего проекта.
-
-
-_________________________________________________________________________________________________________________________________
-
-REVIEW2. Резюме2.
-
-Критические замечания от прошлой проверки исправлены.
-
-Что надо улучшить.
-
-1. Для рендера карточек надо испольхзовать метод render класса CardList (комментарий в этом файле).
-
-Задание принимается.
-
-Желаю дальнейших успехов в обучении и глубоких знаний!
-
-
-
-
-
-
-
-*/
